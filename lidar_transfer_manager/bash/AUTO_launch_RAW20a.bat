@@ -1,0 +1,1 @@
+start "" "C:\Program Files (x86)\Mobatek\MobaXterm\MobaXterm.exe" -newtab "bash /drives/c/Lidar_data/raw20a/xxxlaunch_RAW20a.sh"

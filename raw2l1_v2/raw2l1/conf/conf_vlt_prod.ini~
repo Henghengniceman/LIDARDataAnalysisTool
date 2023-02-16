@@ -1,0 +1,454 @@
+;------------------------------------------------------------------------------
+; raw2l1 user configuration file
+;
+;  ___  __   _   _  ___ _   __
+; | _ \/  \ | | | |(_  | | /  |
+; | v / /\ || 'V' | / /| |_`7 |
+; |_|_\_||_|!_/ \_!|___|___||_|
+;
+; version: 2.1.18
+; SIRTA IPSL/CNRS/EP 2014-2017
+;
+; for TOPROF netCDF-CF format
+;
+;------------------------------------------------------------------------------
+
+; General configuration of the processing
+;------------------------------------------------------------------------------
+[conf]
+reader_dir = reader
+reader = reader_mhc
+netcdf_format = NETCDF4
+netcdf4_compression = true
+netcdf4_compression_level = 1
+
+; Special option for the reader (optional)
+;------------------------------------------------------------------------------
+[reader_conf]
+missing_float = nan
+missing_int = -9
+; altitude range to determine background signal
+bckgrd_min_alt = 75000
+bckgrd_max_alt = 105000
+
+rcs = [0, 1, 2, 3, 4]
+channels = ['BT0', 'BC0', 'BT1', 'BC1', 'BC2']
+
+; Variables required by TOPROF chosen format
+;==============================================================================
+
+; Global attribute of the netCDF file
+;------------------------------------------------------------------------------
+[global]
+system = VELETA 
+manufacturers = Raymetrics
+overlap_is_corrected = false
+overlap_function = false
+site_location = Granada, Spain
+instrument_id = VELETA
+sofware_version =
+title = VELETA multiwavelength LIDAR L1A data. Range corrected signal without any additional correction using the standard lidar configuration
+summary =
+keywords = GCMD:EARTH SCIENCE, GCMD:ATMOSPHERE, GCMD:CLOUDS, GCMD:CLOUD PROPERTIES, GCMD:CLOUD BASE HEIGHT, GCMD:AEROSOLS, GCMD:AEROSOL BACKSCATTER, GCMD:SPECTRAL/ENGINEERING, GCMD:LIDAR, GCMD:LIDAR BACKSCATTER
+Conventions = CF-1.6, ACDD-1.3
+id =
+naming_authority =
+history =
+source = UGR
+processing_level = 1a
+comment =
+aknowledgement =
+license = TBD
+standard_name_vocabulary = CF Standard Name Table v36
+date_created =
+creator_name = GFAT research group. University of Granada
+creator_email = gfat@ugr.es
+creator_url = 
+creator_type = institution
+creator_institution = University of Granada
+institution = University of Granada
+publisher_name = GFAT research group
+publisher_email = gfat@ugr.es
+publisher_url = gfat@ugr.es
+publisher_type = institution
+publisher_institution = University of Granada
+geospatial_bounds = POINT (37.1600, -3.6100)
+geospatial_bounds_crs = 
+geospatial_bounds_vertical_crs = 
+geospatial_lat_min = 37.1600
+geospatial_lat_max = 37.1600
+geospatial_lat_units = degrees_north
+geospatial_lat_resolution = 0 degree_north
+geospatial_lon_min = -3.6100
+geospatial_lon_max = -3.6100
+geospatial_lon_units = degrees_east
+geospatial_lon_resolution = 0 degree
+geospatial_vertical_min = 7.5
+geospatial_vertical_max = 120000
+geospatial_vertical_positive = up
+geospatial_vertical_units = m
+geospatial_vertical_resolution = 7.5 meters
+time_coverage_start =
+time_coverage_end =
+time_coverage_duration = P0000-00-01T00:00:00
+time_coverage_resolution = P0000-00-00T00:01:00
+date_modified =
+date_issued =
+date_metadata_modified = 2018-05-05T00:00:00Z
+product_version = 1
+keywords_vocabulary = GCMD:GCMD Keywords, CF:NetCDF COARDS Climate and Forecast Standard Names
+platform = In Situ Land-based Platforms, GROUND-BASED OBSERVATIONS
+platform_vocabulary = GCMD:GCMD Keywords
+instrument = GCMD:Earth Remote Sensing Instruments, GCMD:Active Remote Sensing, GCMD:Profilers/Sounders, GCMD:Lidar/Laser Sounders, GCMD:CLOUD LIDAR, GCMD: LIDAR
+instrument_vocabulary = GCMD:GCMD Keywords
+cdm_data_type =
+metadata_link =
+references =
+
+laser_type = Nd:YAG
+laser_manufacturer = Quantel
+laser_model = TBD
+
+telescope0_type =  Cassegrain
+telescope0_manufacturer = Raymetrics
+telescope0_model = special
+
+; Dimensions
+;------------------------------------------------------------------------------
+[time]
+dim = time
+type = $time$
+standard_name = time
+units = days since 1970-01-01 00:00:00
+calendar = standard
+bounds = time_bnds
+value = $reader_data$, time
+
+[range]
+dim = range
+type = $float$
+long_name = range above ground level
+units = m
+value = $reader_data$, range
+
+[n_chan]
+dim = n_chan
+;type = $integer$
+;long_name = number of channels
+;units = dimensionless
+;value = $reader_data$, n_chan
+size = $reader_data$, n_chan
+
+[nv]
+dim = nv
+;type = $integer$
+;long_name = tbd
+;units = dimensionless
+;value = $reader_data$, nv
+size = $reader_data$, nv
+
+; variables
+;------------------------------------------------------------------------------
+[time_bnds]
+dim = time, nv
+type = $time$
+units = days since 1970-01-01 00:00:00 UTC
+calendar = standard
+value = $reader_data$, time_bounds
+
+[lat]
+dim = $none$
+type = $float$
+standard_name = latitude
+long_name = latitude
+units = degrees_north
+value = $reader_data$, latitude
+
+[lon]
+dim = $none$
+type = $float$
+standard_name = longitude
+long_name = longitude
+units = degrees_east
+value = $reader_data$, longitude
+
+[altitude]
+dim = $none$
+type = $float$
+standard_name = altitude
+long_name = altitude
+units = m
+value = $reader_data$, altitude
+
+[wavelength]
+type = $float$
+dim = n_chan
+long_name = measured wavelength
+units = nm
+value = $reader_data$, wavelength
+
+[telescope]
+type = $integer$
+dim = n_chan
+long_name = telescope used
+flag_values = 1
+flag_meanings = 'telescope1'
+value = $reader_data$, telescope
+
+[polarization]
+type = $short$
+dim = n_chan
+long_name = polarization of each channel
+flag_values = 0, 1, 2
+flag_meanings = none parallel perpendicular
+value = $reader_data$, polarization
+
+[detection_mode]
+type = $short$
+dim = n_chan
+long_name = detection mode
+flag_values = 0, 1
+flag_meanings = analog photocounting
+value = $reader_data$, detection_mode_ind
+
+[bin_shift]
+type = $integer$
+dim = n_chan
+_FillValue = -9
+missing_value = -9
+long_name = bin shift
+value = $reader_data$, bin_shift
+
+[adc_bits]
+type = $integer$
+dim = n_chan
+_FillValue = -9
+missing_value = -9
+long_name = the number of bits of the ADC
+value = $reader_data$, adc_bits
+
+[discriminator_level]
+type = $integer$
+dim = n_chan
+_FillValue = -9
+missing_value = -9
+long_name = discriminator level
+value = $reader_data$, discriminator_level
+
+[adc_range]
+type = $float$
+dim = n_chan
+_FillValue = -9
+missing_value = -9
+long_name = data range of the ADC
+value = $reader_data$, adc_range
+
+[active_channel]
+type = $integer$
+dim = time, n_chan
+_FillValue = -9
+missing_value = -9
+long_name = activated channel
+value = $reader_data$, active
+
+[voltage]
+type = $integer$
+dim = time, n_chan
+_FillValue = -9
+missing_value = -9
+long_name = high voltage of the PM for each channel
+units = V
+value = $reader_data$, voltage
+
+[l0_wavelength]
+type = $float$
+dim = $none$
+long_name = laser 0 wavelength
+units = nm
+value = 1064
+laser_type = Nd:YAG
+manufacturer = Quantel
+model = Quanta Ray Pro-290-30
+polarization = vertical
+
+[l0_beam_diam]
+type = $float$
+dim = $none$
+long_name = laser 0 beam diameter
+units = mm
+value = 3
+
+[l0_beam_div]
+type = $float$
+dim = $none$
+long_name = laser 0 beam divergence
+units = mrad
+value = 0.5
+
+[l0_prf]
+type = $float$
+dim = $none$
+long_name = laser 0 pulse repetition frequency
+units = Hz
+value = $reader_data$, frequency
+
+[l1_wavelength]
+type = $float$
+dim = $none$
+long_name = laser 1 wavelength
+units = nm
+value = 532
+
+
+; [t0_ad]
+; type = $float$
+; dim = $none$
+; _FillValue = nan
+; long_name = telescope 0 aperture diameter
+; units = m
+; value = 0.6
+
+; [t0_od]
+; type = $float$
+; dim = $none$
+; _FillValue = nan
+; long_name = telescope 0 obscuration diameter
+; units = m
+; value = 0.16
+
+; [t0_fl]
+; type = $float$
+; dim = $none$
+; _FillValue = nan
+; long_name = telescope 0 focal length
+; units = m
+; value = 6
+
+; [t0_fov]
+; type = $float$
+; dim = $none$
+; _FillValue = nan
+; long_name = telescope 0 field of view
+; units = mrad
+; value = 1
+
+[rcs_00]
+dim = time, range
+type = $double$
+_FillValue = nan
+missing_value = nan
+long_name = range corrected signal
+overlap = 0
+units = $reader_data$, units_rcs_00
+value = $reader_data$, rcs_00
+
+[bckgrd_rcs_00]
+dim = time
+type = $double$
+_FillValue = nan
+missing_value = nan
+long_name = background signal
+units = $reader_data$, units_00
+comment = $reader_data$, bckgrd_rcs_comment
+value = $reader_data$, bckgrd_rcs_00
+
+[rcs_01]
+dim = time, range
+type = $double$
+_FillValue = nan
+missing_value = nan
+long_name = range corrected signal
+overlap = 0
+units = $reader_data$, units_rcs_01
+value = $reader_data$, rcs_01
+
+[bckgrd_rcs_01]
+dim = time
+type = $double$
+_FillValue = nan
+missing_value = nan
+long_name = background signal
+units = $reader_data$, units_01
+comment = $reader_data$, bckgrd_rcs_comment
+value = $reader_data$, bckgrd_rcs_01
+
+[rcs_02]
+dim = time, range
+type = $double$
+_FillValue = nan
+missing_value = nan
+long_name = range corrected signal
+overlap = 0
+units = $reader_data$, units_rcs_02
+value = $reader_data$, rcs_02
+
+[bckgrd_rcs_02]
+dim = time
+type = $double$
+_FillValue = nan
+missing_value = nan
+long_name = background signal
+units = $reader_data$, units_02
+comment = $reader_data$, bckgrd_rcs_comment
+value = $reader_data$, bckgrd_rcs_02
+
+[rcs_03]
+dim = time, range
+type = $double$
+_FillValue = nan
+missing_value = nan
+long_name = range corrected signal
+overlap = 0
+units = $reader_data$, units_rcs_03
+value = $reader_data$, rcs_03
+
+[bckgrd_rcs_03]
+dim = time
+type = $double$
+_FillValue = nan
+missing_value = nan
+long_name = background signal
+units = $reader_data$, units_03
+comment = $reader_data$, bckgrd_rcs_comment
+value = $reader_data$, bckgrd_rcs_03
+
+[rcs_04]
+dim = time, range
+type = $double$
+_FillValue = nan
+missing_value = nan
+long_name = range corrected signal
+overlap = 0
+units = $reader_data$, units_rcs_04
+value = $reader_data$, rcs_04
+
+[bckgrd_rcs_04]
+dim = time
+type = $double$
+_FillValue = nan
+missing_value = nan
+long_name = background signal
+units = $reader_data$, units_04
+comment = $reader_data$, bckgrd_rcs_comment
+value = $reader_data$, bckgrd_rcs_04
+
+[time_resol]
+dim = time
+type = $float$
+long_name = time resolution
+units = s
+value = $reader_data$, time_resol
+
+[range_resol]
+dim = $none$
+type = $float$
+long_name = range resolution
+units = m
+value = $reader_data$, range_resol
+
+[tilt_angle]
+dim = $none$
+type = $float$
+long_name = instrument tilt angle from vertical
+units = degree
+value = $reader_data$, zenith

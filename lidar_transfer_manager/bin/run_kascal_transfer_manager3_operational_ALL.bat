@@ -1,0 +1,1 @@
+C:\Users\user\anaconda3\Scripts\activate.bat && python c:\DataAnalysisTool\lidar_transfer_manager\python\lidar_transfer_manager2.py -l kascal -i 20220315 -e 20220401

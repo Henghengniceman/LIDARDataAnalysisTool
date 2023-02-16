@@ -1,0 +1,3 @@
+C:\Users\user\anaconda3\Scripts\activate.bat && python c:\DataAnalysisTool\lidar_raw2l1\lidar_raw2l1.py -l KASCAL -i 20180103 -e 20210803 -t AS -x RM -w True -y c:\DataAnalysisTool\lidar_raw2l1\config\config_kascal.yaml
+C:\Users\user\anaconda3\Scripts\activate.bat && python c:\DataAnalysisTool\lidar_raw2l1\lidar_raw2l1.py -l KASCAL -i 20180103 -e 20210803 -t ZS -x RM -w True -y c:\DataAnalysisTool\lidar_raw2l1\config\config_kascal.yaml
+C:\Users\user\anaconda3\Scripts\activate.bat && python c:\DataAnalysisTool\lidar_raw2l1\lidar_raw2l1.py -l KASCAL -i 20180103 -e 20210803 -t FP -x RM -w True -y c:\DataAnalysisTool\lidar_raw2l1\config\config_kascal.yaml

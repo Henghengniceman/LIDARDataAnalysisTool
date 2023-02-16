@@ -1,0 +1,12 @@
+[lidar_transfer_manager.py:780:main]INFO: MULHACEN RAW TO 0A MANAGER
+[lidar_transfer_manager.py:781:main]INFO: [20220221_183001] Start Main
+[lidar_transfer_manager.py:383:transfer_measurement]INFO: [20220221_183001] Start Transfer. RS
+[lidar_transfer_manager.py:520:transfer_measurement]WARNING: Files for RS not found. Check Manually
+[lidar_transfer_manager.py:526:transfer_measurement]INFO: [20220221_183001] End Transfer. RS
+[lidar_transfer_manager.py:383:transfer_measurement]INFO: [20220221_183001] Start Transfer. DP
+[lidar_transfer_manager.py:520:transfer_measurement]WARNING: Files for DP not found. Check Manually
+[lidar_transfer_manager.py:526:transfer_measurement]INFO: [20220221_183001] End Transfer. DP
+[lidar_transfer_manager.py:383:transfer_measurement]INFO: [20220221_183001] Start Transfer. TC
+[lidar_transfer_manager.py:520:transfer_measurement]WARNING: Files for TC not found. Check Manually
+[lidar_transfer_manager.py:526:transfer_measurement]INFO: [20220221_183001] End Transfer. TC
+[lidar_transfer_manager.py:786:main]INFO: [20220221_183001] End Main

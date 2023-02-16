@@ -1,0 +1,4 @@
+[lidar_transfer_manager.py:780:main]INFO: MULHACEN RAW TO 0A MANAGER
+[lidar_transfer_manager.py:781:main]INFO: [20220223_163001] Start Main
+[lidar_transfer_manager.py:722:run]INFO: No measurement folders in C:\Lidar_Data\RAWS.
+[lidar_transfer_manager.py:786:main]INFO: [20220223_163001] End Main
